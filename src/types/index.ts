@@ -20,3 +20,11 @@ export interface Category {
 	id: number;
 	name: string;
 }
+
+export interface ProductsPaginationProps {
+	currentPage: number;
+	totalPages: number;
+	totalProducts: number;
+	itemsPerPage: number;
+	onPageChange: (page: number) => void;
+}

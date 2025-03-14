@@ -1,9 +1,7 @@
-// components/product/product-grid.tsx
 'use client';
 
 import { Product } from '@/types';
 import ProductCard from './product-card';
-import { useEffect, useState } from 'react';
 
 interface ProductGridProps {
 	products: Product[];

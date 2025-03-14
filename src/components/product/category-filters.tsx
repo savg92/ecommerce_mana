@@ -11,7 +11,7 @@ export default function CategoryFilters({
   selectedCategory,
   onCategoryClick
 }: CategoryFiltersProps): React.ReactElement {
-  if (categories.length === 0) return null;
+  if (categories.length === 0) return <></>;
   
   return (
     <div className="flex flex-wrap gap-2 mb-8">

@@ -8,14 +8,7 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import { useMemo } from 'react';
-
-interface ProductsPaginationProps {
-  currentPage: number;
-  totalPages: number;
-  totalProducts: number;
-  itemsPerPage: number;
-  onPageChange: (page: number) => void;
-}
+import { ProductsPaginationProps } from '@/types';
 
 export default function ProductsPagination({
   currentPage,

@@ -1,4 +1,3 @@
-
 const Footer = () => {
 	return (
 		<footer className='bg-gray-100 py-6 border-t'>
@@ -33,6 +32,6 @@ const Footer = () => {
 			</div>
 		</footer>
 	);
-}
+};
 
 export default Footer;

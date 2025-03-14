@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getProducts, getCategories } from '@/services/api';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Product } from '@/types';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import ProductGrid from '@/components/product/product-grid';
 import CategoryFilters from '@/components/product/category-filters';
 import ProductsLoading from '@/components/product/products-loading';
@@ -12,7 +12,6 @@ import ProductsError from '@/components/product/products-error';
 import ProductsPagination from '@/components/product/products-pagination';
 import ActiveFilters from '@/components/product/active-filters';
 
-// Type-safe constant
 const PRODUCTS_PER_PAGE: number = 8;
 
 export default function ProductsPage(): React.ReactElement {
@@ -65,12 +64,25 @@ export default function ProductsPage(): React.ReactElement {
   const totalProducts = filteredProducts.length;
   const totalPages = Math.max(1, Math.ceil(totalProducts / PRODUCTS_PER_PAGE));
   
+  // Update page in URL
+  const updatePage = useCallback((page: number): void => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (page === 1) {
+      params.delete('page');
+    } else {
+      params.set('page', page.toString());
+    }
+
+    router.push(`/products?${params.toString()}`);
+  }, [router, searchParams]);
+
   // Ensure currentPage is valid
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
       updatePage(1);
     }
-  }, [totalPages, currentPage]);
+  }, [totalPages, currentPage, updatePage]);
 
   // Get current page products
   const currentProducts = useMemo<Product[]>(() => {
@@ -82,19 +94,6 @@ export default function ProductsPage(): React.ReactElement {
   const handleCategoryClick = (category: string): void => {
     setSelectedCategory(prev => prev === category ? null : category);
     updatePage(1); // Reset to first page when changing category
-  };
-
-  // Update page in URL
-  const updatePage = (page: number): void => {
-    const params = new URLSearchParams(searchParams.toString());
-    
-    if (page === 1) {
-      params.delete('page');
-    } else {
-      params.set('page', page.toString());
-    }
-    
-    router.push(`/products?${params.toString()}`);
   };
 
   if (productsLoading) return <ProductsLoading />;
