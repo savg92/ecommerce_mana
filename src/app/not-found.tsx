@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { useEffect, useState, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Home, ArrowLeft, AlertCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 function SearchParamsWrapper() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const searchParams = useSearchParams();
 	return null;
 }
 
