@@ -28,3 +28,8 @@ export interface ProductsPaginationProps {
 	itemsPerPage: number;
 	onPageChange: (page: number) => void;
 }
+
+export interface ErrorPageProps {
+	error: Error & { digest?: string };
+	reset: () => void;
+}

@@ -4,19 +4,13 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { RefreshCw, Home } from 'lucide-react';
-
-// Define strict type-safe props according to Next.js error boundary requirements
-interface ErrorPageProps {
-  error: Error & { digest?: string };
-  reset: () => void;
-}
+import { ErrorPageProps } from '@/types';
 
 export default function Error({
   error,
   reset
 }: ErrorPageProps): React.ReactElement {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error('Application error:', error);
   }, [error]);
 
