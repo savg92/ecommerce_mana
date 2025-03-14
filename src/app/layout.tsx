@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'FakeStore - E-commerce',
+	title: 'Off Shore Clothing',
 	description:
 		'E-commerce application built with Next.js, React Query, and Shadcn UI',
 };

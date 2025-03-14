@@ -22,7 +22,6 @@ export default function ProductsPage(): React.ReactElement {
   const currentPage = pageParam ? parseInt(pageParam, 10) : 1;
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  // Fetch products and categories
   const { 
     data: products, 
     isLoading: productsLoading, 
@@ -37,7 +36,6 @@ export default function ProductsPage(): React.ReactElement {
     queryFn: getCategories,
   });
 
-  // Filter products by category and search query
   const filteredProducts = useMemo<Product[]>(() => {
     if (!products) return [];
 
@@ -60,11 +58,9 @@ export default function ProductsPage(): React.ReactElement {
     return filtered;
   }, [products, selectedCategory, query]);
 
-  // Pagination calculations
   const totalProducts = filteredProducts.length;
   const totalPages = Math.max(1, Math.ceil(totalProducts / PRODUCTS_PER_PAGE));
   
-  // Update page in URL
   const updatePage = useCallback((page: number): void => {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -77,23 +73,20 @@ export default function ProductsPage(): React.ReactElement {
     router.push(`/products?${params.toString()}`);
   }, [router, searchParams]);
 
-  // Ensure currentPage is valid
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
       updatePage(1);
     }
   }, [totalPages, currentPage, updatePage]);
 
-  // Get current page products
   const currentProducts = useMemo<Product[]>(() => {
     const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
     return filteredProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
   }, [filteredProducts, currentPage]);
 
-  // Handler for category selection
   const handleCategoryClick = (category: string): void => {
     setSelectedCategory(prev => prev === category ? null : category);
-    updatePage(1); // Reset to first page when changing category
+    updatePage(1);
   };
 
   if (productsLoading) return <ProductsLoading />;
