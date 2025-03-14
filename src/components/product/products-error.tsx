@@ -1,6 +1,4 @@
-interface ProductsErrorProps {
-  message: string;
-}
+import { ProductsErrorProps } from '../../types/index';
 
 export default function ProductsError({ message }: ProductsErrorProps): React.ReactElement {
   return (

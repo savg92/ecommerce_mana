@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Star, ArrowLeft, ShoppingCart } from 'lucide-react';
 import { toast } from 'sonner';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useCartStore from '@/lib/store/cart-store';
 import { Product } from '@/types';
 
@@ -18,13 +18,7 @@ const Page = (): React.ReactElement => {
 	const router = useRouter();
 	const productId = params.id as string;
 	const [imageError, setImageError] = useState<boolean>(false);
-	const [isMounted, setIsMounted] = useState<boolean>(false);
 	const addItemToCart = useCartStore((state) => state.addItem);
-
-	// Handle hydration mismatch by ensuring client-side rendering for dynamic content
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
 
 	const {
 		data: product,
@@ -38,7 +32,6 @@ const Page = (): React.ReactElement => {
 	const handleAddToCart = (): void => {
 		if (!product) return;
 
-		// Add item to cart
 		addItemToCart(product);
 
 		toast(`${product.title} added to cart`, {
@@ -50,7 +43,6 @@ const Page = (): React.ReactElement => {
 		});
 	};
 
-	// Handle image loading errors
 	const handleImageError = (): void => {
 		setImageError(true);
 	};
@@ -59,7 +51,6 @@ const Page = (): React.ReactElement => {
 		router.back();
 	};
 
-	// Loading state
 	if (isLoading) {
 		return (
 			<div className='container max-w-4xl mx-auto px-4 py-4 sm:py-6 md:py-8'>
@@ -86,7 +77,6 @@ const Page = (): React.ReactElement => {
 		);
 	}
 
-	// Error state
 	if (error || !product) {
 		return (
 			<div className='container max-w-4xl mx-auto px-4 py-4 sm:py-6 md:py-8 text-center'>
@@ -108,7 +98,6 @@ const Page = (): React.ReactElement => {
 
 	return (
 		<div className='container max-w-4xl mx-auto px-4 py-4 sm:py-6 md:py-8'>
-			{/* Back button - responsive sizing */}
 			<Button
 				variant='ghost'
 				size='sm'
@@ -119,7 +108,6 @@ const Page = (): React.ReactElement => {
 			</Button>
 
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8'>
-				{/* Product Image - responsive container */}
 				<div className='bg-white p-4 sm:p-6 md:p-8 rounded-lg border flex items-center justify-center'>
 					<div className='relative h-64 sm:h-80 md:h-96 w-full flex items-center justify-center'>
 						{!imageError ? (
@@ -141,7 +129,6 @@ const Page = (): React.ReactElement => {
 					</div>
 				</div>
 
-				{/* Product Details - responsive spacing */}
 				<div className='space-y-4 sm:space-y-5 md:space-y-6'>
 					<div>
 						<h1 className='text-xl sm:text-2xl md:text-3xl font-bold'>
@@ -150,7 +137,6 @@ const Page = (): React.ReactElement => {
 						<Badge className='mt-2'>{product.category}</Badge>
 					</div>
 
-					{/* Optional chaining for type safety */}
 					{product.rating && (
 						<div className='flex items-center'>
 							<div className='flex items-center text-yellow-500 mr-4'>

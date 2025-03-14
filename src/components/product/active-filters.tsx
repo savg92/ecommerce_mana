@@ -1,9 +1,5 @@
 import { Badge } from '@/components/ui/badge';
-
-interface ActiveFiltersProps {
-  query: string;
-  selectedCategory: string | null;
-}
+import { ActiveFiltersProps } from '@/types';
 
 export default function ActiveFilters({
   query,

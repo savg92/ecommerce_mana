@@ -1,12 +1,7 @@
 'use client';
 
-import { Product } from '@/types';
+import { ProductGridProps } from '@/types';
 import ProductCard from './product-card';
-
-interface ProductGridProps {
-	products: Product[];
-	onAddToCart?: (product: Product) => void;
-}
 
 export default function ProductGrid({
 	products,

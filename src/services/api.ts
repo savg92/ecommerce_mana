@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Product } from '@/types';
+import { AxiosError } from 'axios';
 
 const API_URL = 'https://fakestoreapi.com';
 
@@ -11,21 +12,14 @@ const api = axios.create({
 	},
 });
 
-// Handle API errors
-import { AxiosError } from 'axios';
-
 const handleApiError = (error: AxiosError) => {
 	console.error('API Error:', error);
 	if (error.response) {
-		// The request was made and the server responded with a status code
-		// that falls out of the range of 2xx
 		console.error('Response data:', error.response.data);
 		console.error('Response status:', error.response.status);
 	} else if (error.request) {
-		// The request was made but no response was received
 		console.error('Request error:', error.request);
 	} else {
-		// Something happened in setting up the request that triggered an Error
 		console.error('Error message:', error.message);
 	}
 	throw error;

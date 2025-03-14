@@ -33,3 +33,42 @@ export interface ErrorPageProps {
 	error: Error & { digest?: string };
 	reset: () => void;
 }
+
+export interface ProductsErrorProps {
+  message: string;
+}
+
+export interface ActiveFiltersProps {
+	query: string;
+	selectedCategory: string | null;
+}
+
+export interface CartState {
+	items: CartItem[];
+	addItem: (product: Product) => void;
+	removeItem: (productId: number) => void;
+	updateQuantity: (productId: number, quantity: number) => void;
+	clearCart: () => void;
+	getTotalItems: () => number;
+	getTotalPrice: () => number;
+}
+
+export interface ProductCardProps {
+	product: Product;
+	onAddToCart?: (product: Product) => void;
+}
+
+export interface ProductGridProps {
+	products: Product[];
+	onAddToCart?: (product: Product) => void;
+}
+
+export interface CategoryFiltersProps {
+	categories: string[];
+	selectedCategory: string | null;
+	onCategoryClick: (category: string) => void;
+}
+
+export interface ProvidersProps {
+	children: React.ReactNode;
+}

@@ -1,16 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Product, CartItem } from '@/types';
-
-interface CartState {
-	items: CartItem[];
-	addItem: (product: Product) => void;
-	removeItem: (productId: number) => void;
-	updateQuantity: (productId: number, quantity: number) => void;
-	clearCart: () => void;
-	getTotalItems: () => number;
-	getTotalPrice: () => number;
-}
+import { Product, CartState } from '@/types';
 
 const useCartStore = create<CartState>()(
 	persist(
@@ -24,7 +14,6 @@ const useCartStore = create<CartState>()(
 					);
 
 					if (existingItem) {
-						// If product already exists, increase quantity
 						return {
 							items: state.items.map((item) =>
 								item.id === product.id
@@ -33,7 +22,6 @@ const useCartStore = create<CartState>()(
 							),
 						};
 					} else {
-						// Add new product with quantity 1
 						return {
 							items: [...state.items, { ...product, quantity: 1 }],
 						};
@@ -73,7 +61,7 @@ const useCartStore = create<CartState>()(
 			},
 		}),
 		{
-			name: 'cart-storage', // name of the item in localStorage
+			name: 'cart-storage',
 		}
 	)
 );

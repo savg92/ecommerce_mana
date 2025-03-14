@@ -1,10 +1,5 @@
 import { Badge } from '@/components/ui/badge';
-
-interface CategoryFiltersProps {
-  categories: string[];
-  selectedCategory: string | null;
-  onCategoryClick: (category: string) => void;
-}
+import { CategoryFiltersProps } from '@/types';
 
 export default function CategoryFilters({
   categories,

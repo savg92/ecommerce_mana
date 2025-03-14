@@ -20,7 +20,6 @@ export default function ProductsPagination({
   const paginationItems = useMemo(() => {
     const items: React.ReactNode[] = [];
 
-    // First page is always shown
     items.push(
       <PaginationItem key="page-1">
         <PaginationLink
@@ -36,7 +35,6 @@ export default function ProductsPagination({
       </PaginationItem>
     );
 
-    // If there are many pages, we need an ellipsis after page 1
     if (currentPage > 3) {
       items.push(
         <PaginationItem key="ellipsis-1">
@@ -45,13 +43,12 @@ export default function ProductsPagination({
       );
     }
 
-    // Current page neighborhood
     for (
       let i = Math.max(2, currentPage - 1);
       i <= Math.min(totalPages - 1, currentPage + 1);
       i++
     ) {
-      if (i === 1 || i === totalPages) continue; // Skip first and last
+      if (i === 1 || i === totalPages) continue;
       items.push(
         <PaginationItem key={`page-${i}`}>
           <PaginationLink
@@ -68,7 +65,6 @@ export default function ProductsPagination({
       );
     }
 
-    // If there are many pages, we need an ellipsis before the last page
     if (currentPage < totalPages - 2) {
       items.push(
         <PaginationItem key="ellipsis-2">
@@ -77,7 +73,6 @@ export default function ProductsPagination({
       );
     }
 
-    // Last page is always shown (if different from first)
     if (totalPages > 1) {
       items.push(
         <PaginationItem key={`page-${totalPages}`}>

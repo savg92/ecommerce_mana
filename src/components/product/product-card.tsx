@@ -1,6 +1,6 @@
 'use client';
 
-import { Product } from '@/types';
+import { ProductCardProps } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -11,11 +11,6 @@ import { toast } from 'sonner';
 import useCartStore from '@/lib/store/cart-store';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
-interface ProductCardProps {
-	product: Product;
-	onAddToCart?: (product: Product) => void;
-}
 
 export default function ProductCard({
 	product,
@@ -41,7 +36,6 @@ export default function ProductCard({
 		});
 	};
 
-	// Handle image loading errors
 	const handleImageError = (): void => {
 		setImageError(true);
 	};
@@ -62,7 +56,7 @@ export default function ProductCard({
 							className='object-contain max-h-full'
 							priority={false}
 							onError={handleImageError}
-							unoptimized={true} // Skip Next.js image optimization for external URLs
+							unoptimized={true}
 						/>
 					) : (
 						<div className='flex items-center justify-center h-full w-full text-gray-400'>
