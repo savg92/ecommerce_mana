@@ -31,6 +31,7 @@ Clone the repository:
 ```bash
 git clone https://github.com/yourusername/ecommerce_mana.git
 cd ecommerce_mana
+```
 Install dependencies:
 ```bash
 npm install
