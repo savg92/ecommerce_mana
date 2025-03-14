@@ -6,13 +6,16 @@ import { Button } from '@/components/ui/button';
 import { Home, ArrowLeft, AlertCircle } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-function SearchParamsWrapper() {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// Componente cliente que usa useSearchParams
+function ClientSearchParams() {
 	const searchParams = useSearchParams();
-	return null;
+	// Usamos el valor para evitar el warning
+	return (
+		<div style={{ display: 'none' }}>{searchParams ? 'params-loaded' : ''}</div>
+	);
 }
 
-export default function NotFound(): React.ReactElement {
+export default function NotFound() {
 	const [isMounted, setIsMounted] = useState<boolean>(false);
 	const router = useRouter();
 
@@ -66,8 +69,9 @@ export default function NotFound(): React.ReactElement {
 				</div>
 			</div>
 
+			{/* Envolvemos el componente que usa useSearchParams en Suspense */}
 			<Suspense fallback={null}>
-				<SearchParamsWrapper />
+				<ClientSearchParams />
 			</Suspense>
 		</div>
 	);
