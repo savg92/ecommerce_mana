@@ -6,10 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Home, ArrowLeft, AlertCircle } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-// Example component that uses useSearchParams
 function SearchParamsComponent() {
 	const searchParams = useSearchParams();
-	// Your code using searchParams
 	return <div>{searchParams.get('query')}</div>;
 }
 
@@ -67,7 +65,6 @@ export default function NotFoundPage() {
 				</div>
 			</div>
 
-			{/* Wrap the component using useSearchParams in Suspense */}
 			<Suspense fallback={<div>Loading search params...</div>}>
 				<SearchParamsComponent />
 			</Suspense>
