@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart, Search, X } from 'lucide-react';
 import useCartStore from '@/lib/store/cart-store';
 
-const Header = (): React.ReactElement => {
+const HeaderContent = (): React.ReactElement => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -161,6 +161,26 @@ const Header = (): React.ReactElement => {
 				</div>
 			</div>
 		</header>
+	);
+};
+
+const Header = (): React.ReactElement => {
+	return (
+		<Suspense
+			fallback={
+				<header className='bg-white border-b sticky top-0 z-40'>
+					<div className='container mx-auto px-4 py-4'>
+						<div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
+							<div className='animate-pulse bg-gray-200 h-8 w-36'></div>
+							<div className='animate-pulse bg-gray-200 h-10 w-full sm:w-80 rounded'></div>
+							<div className='animate-pulse bg-gray-200 h-6 w-24'></div>
+						</div>
+					</div>
+				</header>
+			}
+		>
+			<HeaderContent />
+		</Suspense>
 	);
 };
 
