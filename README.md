@@ -1,8 +1,6 @@
 # Ecommerce Management App
 A modern, full-stack ecommerce management application built with Next.js, TypeScript, and React Query.
 
-![Product Page Screenshot](./public/screenshot.png)
-
 ## Features
 - **Product Listings**: Browse and search through a catalog of products
 - **Product Details**: View comprehensive product information
