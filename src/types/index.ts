@@ -72,3 +72,51 @@ export interface CategoryFiltersProps {
 export interface ProvidersProps {
 	children: React.ReactNode;
 }
+
+export interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  quantity: number;
+}
+
+export interface MobileCartItemsProps {
+	items: CartItem[];
+	imageErrors: Record<number, boolean>;
+	onImageError: (itemId: number) => void;
+	totalPrice: number;
+}
+
+export interface CartItemCardProps {
+  item: CartItem;
+  hasImageError: boolean;
+  onImageError: (itemId: number) => void;
+}
+
+export interface QuantityControlProps {
+	quantity: number;
+	onQuantityChange: (newQuantity: number) => void;
+	size?: 'sm' | 'default';
+}
+
+export interface DesktopCartTableProps {
+	items: CartItem[];
+	imageErrors: Record<number, boolean>;
+	onImageError: (itemId: number) => void;
+	totalPrice: number;
+	onCheckout: () => void;
+}
+
+export interface RemoveItemDialogProps {
+	itemId: number;
+	isIcon?: boolean;
+}
+
+export interface CheckoutDialogProps {
+	isOpen: boolean;
+	onOpenChange: (open: boolean) => void;
+	onCheckout: () => void;
+}
