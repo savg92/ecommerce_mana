@@ -30,7 +30,7 @@ const Header = (): React.ReactElement => {
 		(e: React.FormEvent<HTMLFormElement>): void => {
 			e.preventDefault();
 
-			const params = new URLSearchParams();
+			const params = new URLSearchParams(searchParams.toString());
 
 			if (searchTerm.trim()) {
 				params.set('query', searchTerm.trim());
@@ -38,7 +38,7 @@ const Header = (): React.ReactElement => {
 
 			router.push(`/products?${params.toString()}`);
 		},
-		[router, searchTerm]
+		[router, searchTerm, searchParams]
 	);
 
 	const handleSearchInputChange = useCallback(
