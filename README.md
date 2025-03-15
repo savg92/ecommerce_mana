@@ -72,3 +72,5 @@ Open http://localhost:3000 with your browser to see the result.
 
 ### Deployment
 This project can be deployed on Vercel, the platform from the creators of Next.js.
+
+You can access the current deployement of the app at https://ecommerce-mana.vercel.app/
